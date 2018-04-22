@@ -17,7 +17,7 @@ program weather_stats
   allocate(min_wind(size(ids)), max_wind(size(ids)), mean_wind(size(ids)))
 
   do i = 1, size(ids)
-    call read_buoy('data/station_' // ids(i) //  '.csv', time, wind_speed)
+    call read_buoy('data/buoy_' // ids(i) //  '.csv', time, wind_speed)
     wind_speed = denan(wind_speed)
     min_wind(i) = minval(wind_speed)
     max_wind(i) = maxval(wind_speed)

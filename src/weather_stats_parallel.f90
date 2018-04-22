@@ -19,6 +19,8 @@ program weather_stats_parallel
   ids = ['42001', '42002', '42003', '42020', '42035',&
     '42036', '42039', '42040', '42055']
 
+  if (num_images() > size(ids)) error stop 'Error: Too many images'
+
   indices = tile_indices(size(ids))
   is = indices(1)
   ie = indices(2)
@@ -26,7 +28,7 @@ program weather_stats_parallel
   allocate(min_wind(is:ie), max_wind(is:ie), mean_wind(is:ie))
 
   do i = is, ie
-    call read_buoy('data/station_' // ids(i) //  '.csv', time, wind_speed)
+    call read_buoy('data/buoy_' // ids(i) //  '.csv', time, wind_speed)
     wind_speed = denan(wind_speed)
     min_wind(i) = minval(wind_speed)
     max_wind(i) = maxval(wind_speed)

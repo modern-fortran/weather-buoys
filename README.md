@@ -31,6 +31,15 @@ make
 ./weather_stats
 ```
 
+If you run the program with the dataset included in this repo,
+you will get the output similar to this:
+
+```
+ Maximum wind speed measured is    40.9000015     at station 42001
+ Highest mean wind speed is    6.47883749     at station 42020
+ Lowest mean wind speed is    5.43456125     at station 42036
+```
+
 ### Running the parallel program
 
 Run the program on 2 parallel images:
@@ -39,4 +48,8 @@ Run the program on 2 parallel images:
 cafrun -n 2 ./weather_stats_parallel
 ```
 
-You can run the program on any number of images.
+The result should be the same as in the serial program,
+but will complete somewhat faster, depending on the number 
+of cores available and number of images you invoke.
+You can run the program on any number of images,
+but no more than the number of files in dataset (9).
