@@ -9,7 +9,7 @@ program weather_stats_parallel
   character(len=5), allocatable :: ids(:)
   character(len=20), allocatable :: time(:)
   real, allocatable :: wind_speed(:)
-  real, allocatable :: min_wind(:), max_wind(:), mean_wind(:)
+  real, allocatable :: max_wind(:), mean_wind(:)
   real, allocatable :: gather(:)[:]
   integer :: is, ie, indices(2)
   integer :: i
@@ -25,12 +25,11 @@ program weather_stats_parallel
   is = indices(1)
   ie = indices(2)
 
-  allocate(min_wind(is:ie), max_wind(is:ie), mean_wind(is:ie))
+  allocate(max_wind(is:ie), mean_wind(is:ie))
 
   do i = is, ie
     call read_buoy('data/buoy_' // ids(i) //  '.csv', time, wind_speed)
     wind_speed = denan(wind_speed)
-    min_wind(i) = minval(wind_speed)
     max_wind(i) = maxval(wind_speed)
     mean_wind(i) = mean(wind_speed)
   end do

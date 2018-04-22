@@ -8,18 +8,17 @@ program weather_stats
   character(len=5), allocatable :: ids(:)
   character(len=20), allocatable :: time(:)
   real, allocatable :: wind_speed(:)
-  real, allocatable :: min_wind(:), max_wind(:), mean_wind(:)
+  real, allocatable :: max_wind(:), mean_wind(:)
   integer :: i
 
   ids = ['42001', '42002', '42003', '42020', '42035',&
     '42036', '42039', '42040', '42055']
 
-  allocate(min_wind(size(ids)), max_wind(size(ids)), mean_wind(size(ids)))
+  allocate(max_wind(size(ids)), mean_wind(size(ids)))
 
   do i = 1, size(ids)
     call read_buoy('data/buoy_' // ids(i) //  '.csv', time, wind_speed)
     wind_speed = denan(wind_speed)
-    min_wind(i) = minval(wind_speed)
     max_wind(i) = maxval(wind_speed)
     mean_wind(i) = mean(wind_speed)
   end do
