@@ -18,7 +18,7 @@ def write_buoy_to_csv(buoyid, startyear, endyear):
     s.wvht[s.wvht > 90] = np.nan
     s.apd[s.apd > 90] = np.nan
 
-    with open('station_' + str(buoyid) + '.csv', 'w') as f:
+    with open('buoy_' + str(buoyid) + '.csv', 'w') as f:
         for n in range(s.time.size):
             record = [
                 s.time[n].strftime('%Y-%m-%d_%H:%M:%S'),
