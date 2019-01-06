@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 
 """
-This script downloads weather buoy data 
+This script downloads weather buoy data
 and stores it into csv files, one for each buoy.
 """
 
 from ndbc import Station
 from datetime import datetime
 import numpy as np
+
 
 def write_buoy_to_csv(buoyid, startyear, endyear):
     s = Station(buoyid, datetime(startyear, 1, 1), datetime(endyear, 1, 1))
@@ -31,6 +32,7 @@ def write_buoy_to_csv(buoyid, startyear, endyear):
                 '%7.2f' % s.apd[n],
             ]
             f.write(','.join(record) + '\n')
+
 
 buoys = [42001, 42002, 42003, 42020, 42035, 42036, 42039, 42040, 42055]
 
