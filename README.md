@@ -53,3 +53,7 @@ but will complete somewhat faster, depending on the number
 of cores available and number of images you invoke.
 You can run the program on any number of images,
 but no more than the number of files in dataset (9).
+
+## Contributors
+
+* [Michael Hirsch](https://github.com/scivision)
