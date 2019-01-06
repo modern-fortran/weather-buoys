@@ -14,4 +14,4 @@ weather_stats_parallel:
 
 clean:
 	$(MAKE) --directory=src $@
-	rm weather_stats*
+	$(RM) weather_stats*

@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
+from datetime import datetime
+from ndbc import Station
+import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('Agg')
 
-import matplotlib.pyplot as plt
-from ndbc import Station
-from datetime import datetime
 
 buoyid = 42002
 
