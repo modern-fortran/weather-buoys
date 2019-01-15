@@ -1,6 +1,6 @@
 # weather-buoys
 
-![](https://travis-ci.org/modern-fortran/weather-buoys.svg?branch=master)
+[![](https://travis-ci.org/modern-fortran/weather-buoys.svg?branch=master)](https://travis-ci.org/modern-fortran/weather-buoys)
 
 Processing weather buoy data in parallel.
 
