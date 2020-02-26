@@ -1,0 +1,4 @@
+git+https://github.com/matplotlib/basemap
+git+https://github.com/wavebitscientific/ndbc
+matplotlib
+numpy

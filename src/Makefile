@@ -18,6 +18,8 @@ weather_stats: weather_stats.f90 $(OBJS)
 weather_stats_parallel: weather_stats_parallel.f90 $(OBJS)
 	$(FC) $< $(OBJS) -o $@
 
+%.o: %.mod
+
 # modules
 mod_arrays.o: mod_arrays.f90
 mod_io.o: mod_io.f90
@@ -25,4 +27,4 @@ mod_parallel.o: mod_parallel.f90
 
 .PHONY:
 clean:
-	rm *.o *.mod weather_stats weather_stats_parallel
+	$(RM) *.o *.mod weather_stats weather_stats_parallel

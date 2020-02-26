@@ -23,11 +23,11 @@ program weather_stats
     mean_wind(i) = mean(wind_speed)
   end do
 
-  write(*,*) 'Maximum wind speed measured is ', maxval(max_wind),&
+  print *, 'Maximum wind speed measured is ', maxval(max_wind),&
      'at station ', ids(maxloc(max_wind))
-  write(*,*) 'Highest mean wind speed is ', maxval(mean_wind),&
+  print *, 'Highest mean wind speed is ', maxval(mean_wind),&
      'at station ', ids(maxloc(mean_wind))
-  write(*,*) 'Lowest mean wind speed is ', minval(mean_wind),&
+  print *, 'Lowest mean wind speed is ', minval(mean_wind),&
      'at station ', ids(minloc(mean_wind))
 
 end program weather_stats

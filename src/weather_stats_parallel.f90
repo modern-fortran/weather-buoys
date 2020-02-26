@@ -39,16 +39,16 @@ program weather_stats_parallel
   gather(is:ie)[1] = max_wind 
   sync all 
   if (this_image() == 1) then
-    write(*,*) 'Maximum wind speed measured is ', maxval(gather),&
+    print *, 'Maximum wind speed measured is ', maxval(gather), &
       'at station ', ids(maxloc(gather))
   end if
 
   gather(is:ie)[1] = mean_wind
   sync all
   if (this_image() == 1) then
-    write(*,*) 'Highest mean wind speed is ', maxval(gather),&
+    print *, 'Highest mean wind speed is ', maxval(gather), &
       'at station ', ids(maxloc(gather))
-    write(*,*) 'Lowest mean wind speed is ', minval(gather),&
+    print *, 'Lowest mean wind speed is ', minval(gather), &
       'at station ', ids(minloc(gather))
   end if
 
