@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 This script downloads weather buoy data
@@ -34,8 +34,8 @@ def write_buoy_to_csv(buoyid, startyear, endyear):
             f.write(','.join(record) + '\n')
 
 
-buoys = [42001, 42002, 42003, 42020, 42035, 42036, 42039, 42040, 42055]
+buoys = [42001, 42002, 42003, 42020, 42035]
 
 for buoy in buoys:
     print('processing buoy:', buoy)
-    write_buoy_to_csv(buoy, 2005, 2017)
+    write_buoy_to_csv(buoy, 2005, 2021)
