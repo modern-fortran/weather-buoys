@@ -70,7 +70,7 @@ app.listen(process.env.PORT, () =>
 );
 
 app.get('/weather_stats', function (req, res) {
-  exec("./weather_stats_parallel", (error, stdout, stderr) => {
+  exec("./weather_stats", (error, stdout, stderr) => {
       if (error) {
           console.log(`error: ${error.message}`);
           res.end( `error: ${error.message}` );
