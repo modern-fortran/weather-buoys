@@ -17,6 +17,7 @@ program weather_stats
 
 !  ids = ['42001', '42002', '42003', '42020', '42035']
 ! Set our array of buoys to just one for now as part of the demo. We can add more with api
+
   ids = ['42001']
   do i = 1, command_argument_count()
     call get_command_argument(i, arg)
@@ -27,7 +28,7 @@ program weather_stats
 
   do i = 1, size(ids)
     call read_buoy('data/buoy_' // ids(i) //  '.csv', time, wind_speed)
-    print '(2a)', 'buoy ', ids(i)
+    print *, 'buoy ', ids(i)
     wind_speed = denan(wind_speed)
     max_wind(i) = maxval(wind_speed)
     mean_wind(i) = mean(wind_speed)
