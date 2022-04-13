@@ -12,8 +12,11 @@ import { locationSuccess, locationError } from './Buoys';
 
 import buoys, { findNearestBuoys, Buoy } from "noaa-buoys";
 import navigator from 'navigator';
+import res from 'express/lib/response';
+import { stderr } from 'process';
 
-// PORT is defined in our .env file as PORT=8081. The dotenv/config module lets us import env vars
+// PORT is defined in our .env file as PORT=8081. The dotenv/config module lets us import env vars but we set a default in case there is no env file
+const port = process.env.PORT || 9090;
 
 // We need the child_process module if we want to execute our executables
 const { exec } = require("child_process");
@@ -22,52 +25,43 @@ const app = express();
 // Use the cross-origin request module to prevent dumb stuff from happening
 
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
 
-// Check if geolocation is available so we aren't insane
-
-if('geolocation' in navigator) {
-  console.log("INFO: Found geolocation!");
-} else {
-  console.log("ERROR: no geolocation found!");
-}
-
-// see if we can get the user's browser geolocated so we can pass lat and long to findNearestBuoys
-app.get('/location', function (req, res) {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(positionSuccess, positionError, { enableHighAccuracy: true });
-  } else {
-    res.send("Your browser is bootleg, there's no geolocation!");
-  }
-})
-
-app.get('/local_buoys', function (req, res) {
-  if (navigator.geolocation) {
-    console.log("INFO: Supposedly I can get geolocation.");
-    var loc = navigator.geolocation.getCurrentPosition(locationSuccess, locationError); 
-    console.log(loc);
-    const localBuoys = findNearestBuoys({
-      location: {
-        latitude: locationSuccess.latitude,
-        longitude: locationSuccess.longitude,
-      },
-      units: "metric",
-      numBuoys: 1,
-      stations: buoys.filter((buoy, Buoy) => buoy.isActive), // optional, defaults to the entire list of buoys
-    });
-    res.send(localBuoys);
-  } else {
-    console.log("WARNING: I can't get geolocation.");
-    res.send("Your browser is so bootleg, there's no geolocation so I can't find any buoys!");
-  };
-})
-
-app.get('/', (req, res) => {
-  res.send("Hey, it's a nodejs server doing nothing yet.");
+app.get('/api/:version', function(req, res) {
+  res.send(req.params.version);
 });
 
-app.listen(process.env.PORT, () =>
-	console.log(`Example app listening on port ${process.env.PORT}!`),
+app.get('/', (req, res) => {
+  res.send("<html><head><b>Hey, it's a nodejs server doing nothing yet.</b></head></html>");
+});
+
+app.post('/api/buoys', function(req, res) {
+  const data = (req.body.buoys);
+  data.forEach(element => {
+    console.log(element);
+  });
+  exec("./weather_stats " + data.join(" "), (error, stdout, stderr) => {
+    if (error) {
+      console.log(`error: ${error.message}`);
+      res.end( `error: ${error.message}` );
+    }
+    if (stderr) {
+      console.log(`stderr: ${stderr}`);
+      res.end( `error: ${stderr}` );
+    }
+    res.end( `${stdout}` );
+  })
+  console.log(data.join(" "));
+});
+
+app.listen(port, () =>
+	console.log(`Example app listening on port ${port}!`),
 );
+
+var execWeatherStats = function(appres, callback) {
+
+}
 
 app.get('/weather_stats', function (req, res) {
   exec("./weather_stats", (error, stdout, stderr) => {

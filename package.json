@@ -25,6 +25,7 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
+    "body-parser": "^1.20.0",
     "buoy-kit": "^0.2.0",
     "child_process": "^1.0.2",
     "cors": "^2.8.5",
