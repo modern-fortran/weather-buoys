@@ -8,6 +8,10 @@ program weather_stats_parallel
 
   character(len=5), allocatable :: ids(:)
   character(len=20), allocatable :: time(:)
+! Add args here
+  character(len=*), parameter :: VERSION = '1.0'
+  character(len=32)           :: arg
+
   real, allocatable :: wind_speed(:)
   real, allocatable :: max_wind(:), mean_wind(:)
   real, allocatable :: gather(:)[:]
@@ -16,8 +20,14 @@ program weather_stats_parallel
 
   real :: min_mean_wind, max_mean_wind, max_max_wind
 
-  ids = ['42001', '42002', '42003', '42020', '42035',&
-    '42036', '42039', '42040', '42055']
+!  ids = ['42001', '42002', '42003', '42020', '42035',&
+!    '42036', '42039', '42040', '42055']
+  ids = ['42001']
+
+  do i = 1, command_argument_count()
+    call get_command_argument(i, arg)
+    ids = [ids, arg]
+  end do
 
   if (num_images() > size(ids)) error stop 'Error: Too many images'
 

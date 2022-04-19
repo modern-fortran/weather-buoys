@@ -36,7 +36,7 @@ app.get('/inputvals', function(req, res){
   console.log(req.query);
   const buoys = Object.values(req.query);
   console.log(buoys);
-  exec("./weather_stats " + buoys.join(" "), (error, stdout, stderr) => {
+  exec("./weather_stats_parallel " + buoys.join(" "), (error, stdout, stderr) => {
     if (error) {
       console.log(`error: ${error.message}`);
       res.end( `error: ${error.message}` );
@@ -57,7 +57,7 @@ app.post('/api/buoys', function(req, res) {
   data.forEach(element => {
     console.log(element);
   });
-  exec("./weather_stats " + data.join(" "), (error, stdout, stderr) => {
+  exec("./weather_stats_parallel " + data.join(" "), (error, stdout, stderr) => {
     if (error) {
       console.log(`error: ${error.message}`);
       res.end( `error: ${error.message}` );
@@ -76,7 +76,7 @@ app.listen(port, () =>
 );
 
 app.get('/weather_stats', function (req, res) {
-  exec("./weather_stats", (error, stdout, stderr) => {
+  exec("./weather_stats_parallel", (error, stdout, stderr) => {
       if (error) {
           console.log(`error: ${error.message}`);
           res.end( `error: ${error.message}` );
