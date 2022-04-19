@@ -1,12 +1,13 @@
-import 'dotenv/config';
-import cors from 'cors';
-import express from 'express';
+var express = require('express')
+var app = express();
+
+require('dotenv').config();
 
 // useful links:
 // https://github.com/gretzky/noaa-buoys
 // 
-import res from 'express/lib/response';
-import { stderr } from 'process';
+// import res from 'express/lib/response';
+// import { stderr } from 'process';
 
 // PORT is defined in our .env file as PORT=8081. The dotenv/config module lets us import env vars but we set a default in case there is no env file
 const port = process.env.PORT || 9090;
@@ -14,10 +15,9 @@ const port = process.env.PORT || 9090;
 // We need the child_process module if we want to execute our executables
 const { exec } = require("child_process");
 
-const app = express();
+//const app = express();
 // Use the cross-origin request module to prevent dumb stuff from happening
 
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 
